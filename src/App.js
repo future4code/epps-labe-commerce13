@@ -6,6 +6,7 @@ import Carrinho from './components/carrinho/Carrinho';
 
 
 
+
 export default class App extends React.Component{
   render(){
       return (
