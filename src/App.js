@@ -28,6 +28,7 @@ const DivCarrinho = styled.div`
 
 
 
+
 export default class App extends React.Component {
   state = {
     carrinhoAparece: true,
@@ -127,6 +128,7 @@ export default class App extends React.Component {
     return (
       <Container className="container">
 
+ 
         <Filter></Filter>
         <Home></Home>
         <Carrinho

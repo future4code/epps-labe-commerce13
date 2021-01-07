@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ProdutoCarrinho from '../produtoCarrinho/ProdutoCarrinho';
 
+
 const CarrinhoContainer = styled.div`
     border:solid 1px black;
     min-height: 90vh;
@@ -40,5 +41,6 @@ export default class Carrinho extends React.Component {
                 <Total>Total: <strong>R$ {this.props.precoTotal}</strong></Total>
             </CarrinhoContainer>
         )
+
     }
 }
