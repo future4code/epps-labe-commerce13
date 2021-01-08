@@ -28,73 +28,74 @@ const DivCarrinho = styled.div`
 
 const arrayProdutos = [
   {
-      id: 1,
-      img: 'https://picsum.photos/200/300?random=1',
-      nome: 'Produto 1',
-      valor: 170.00,
-      contador: 0
+    id: 1,
+    img: 'https://picsum.photos/200/300?random=1',
+    nome: 'Produto 1',
+    valor: 170.00,
+    contador: 0
   },
 
   {
-      id: 2,
-      img: 'https://picsum.photos/200/300?random=2',
-      nome: 'Produto 2',
-      valor: 50.00, 
-      contador: 0
+    id: 2,
+    img: 'https://picsum.photos/200/300?random=2',
+    nome: 'Produto 2',
+    valor: 50.00,
+    contador: 0
   },
 
   {
-      id: 3,
-      img: 'https://picsum.photos/200/300?random=3',
-      nome: 'Produto 3',
-      valor: 399.00, 
-      contador: 0
+    id: 3,
+    img: 'https://picsum.photos/200/300?random=3',
+    nome: 'Produto 3',
+    valor: 399.00,
+    contador: 0
   },
 
   {
-      id: 4,
-      img: 'https://picsum.photos/200/300?random=4',
-      nome: 'Produto 4',
-      valor: 300.00, 
-      contador: 0
+    id: 4,
+    img: 'https://picsum.photos/200/300?random=4',
+    nome: 'Produto 4',
+    valor: 300.00,
+    contador: 0
   },
 
   {
-      id: 5,
-      img: 'https://picsum.photos/200/300?random=5',
-      nome: 'Produto 5',
-      valor: 250.00, 
-      contador: 0
+    id: 5,
+    img: 'https://picsum.photos/200/300?random=5',
+    nome: 'Produto 5',
+    valor: 250.00,
+    contador: 0
   },
 
   {
-      id: 6,
-      img: 'https://picsum.photos/200/300?random=6',
-      nome: 'Produto 6',
-      valor: 250.00, 
-      contador: 0
+    id: 6,
+    img: 'https://picsum.photos/200/300?random=6',
+    nome: 'Produto 6',
+    valor: 250.00,
+    contador: 0
   },
 
   {
-      id: 7,
-      img: 'https://picsum.photos/200/300?random=7',
-      nome: 'Produto 7',
-      valor: 120.00, 
-      contador: 0
+    id: 7,
+    img: 'https://picsum.photos/200/300?random=7',
+    nome: 'Produto 7',
+    valor: 120.00,
+    contador: 0
   },
 
   {
-      id: 8,
-      img: 'https://picsum.photos/200/300?random=8',
-      nome: 'Produto 8',
-      valor: 150.00, 
-      contador: 0
+    id: 8,
+    img: 'https://picsum.photos/200/300?random=8',
+    nome: 'Produto 8',
+    valor: 150.00,
+    contador: 0
   }
 ]
 
 export default class App extends React.Component {
   state = {
     listaProdutos: [...arrayProdutos],
+    listaId: [],
     carrinhoAparece: false,
     carrinhoTeste: [],
     precoTotal: 0,
@@ -117,65 +118,46 @@ export default class App extends React.Component {
   somarPreco = () => {
     let somaPreco = 0
     this.state.carrinhoTeste.map(produto => {
-      somaPreco += produto.valor 
+      somaPreco += produto.quantidade * produto.produto.valor
     })
     this.setState({ precoTotal: somaPreco })
   }
 
-  adicionarAoCarrinho = (id) => {
-    
-    const arrayTesteCarrinho = [...this.state.carrinhoTeste]
-    // tem que adicionar ao objeto do produto o contador = 1 se o produto é novo, ou somar contador +1 se o produto é repetido.
-    this.state.listaProdutos.map((produto) => {
-      console.log('Produtos', produto)
-      if(produto.id === id && produto.contador === 0){
-        const contadorTeste = produto.contador + 1
-        console.log('contador teste', contadorTeste)
-        const objetoTeste = {
-          id: produto.id,
-          nome: produto.nome,
-          valor: produto.valor,
-          contador: contadorTeste 
-        }
-        arrayTesteCarrinho.push(objetoTeste)
 
-        console.log('arrayTesteCarrinho', arrayTesteCarrinho) 
-      } else if(produto.id === id && produto.contador > 0){
-        /* arrayTesteCarrinho = this.deletarProdutoUnicoDaLista(produto.id)
-        const objetoTeste = {
-          id: produto.id,
-          nome: produto.nome,
-          valor: produto.valor,
-          contador: produto.contador + 1
-        }
-        console.log('Obejeto teste',objetoTeste)
-        arrayTesteCarrinho.push() */
-        console.log('Entrei no eslse')
-      }
-    })
-    this.setState({carrinhoTeste: arrayTesteCarrinho})
-    console.log('Carrinho teste',this.state.carrinhoTeste)
+  adicionarAoCarrinho = (produto) => {
+    const novoCarro = this.state.carrinhoTeste
+    //pegando o índice do produto
+    const indiceDoProduto = this.state.carrinhoTeste.findIndex((item) => item.produto.id === produto.id)
+    //verificando se indice do produto é maior que -1
+    if (indiceDoProduto > -1) {
+      //aqui a quantidade do item do array é somada
+      novoCarro[indiceDoProduto].quantidade += 1
+    } else {
+      //aqui eles tão dando push e criando um array que tem product e uma variável quantity e setando como 1.
+      novoCarro.push({ produto: produto, quantidade: 1 })
+    }
+    this.somarPreco()
   }
 
+
   deletarProduto = (id) => {
+
     this.state.carrinhoTeste.map(produto => {
 
-      if (produto.id === id && produto.contador > 1) {
+      if (produto.produto.id === id && produto.quantidade > 1) {
         this.deletarProdutoRepetido(produto)
 
-      } else if (produto.id === id && produto.contador === 1) {
-        const novoArrayProdutos = this.deletarProdutoUnicoDaLista(produto.id)
+      } else if (produto.produto.id === id && produto.quantidade === 1) {
+        const novoArrayProdutos = this.deletarProdutoUnicoDaLista(produto.produto.id)
         this.setState({ carrinhoTeste: novoArrayProdutos })
-        console.log(this.state.carrinhoTeste)
       }
     })
     this.somarPreco()
-    console.log(this.state.carrinhoTeste)
   }
 
   deletarProdutoUnicoDaLista = (id) => {
     const novoArray = this.state.carrinhoTeste.filter(produto => {
-      return produto.id !== id
+      return produto.produto.id !== id
     })
     return novoArray
   }
@@ -184,11 +166,11 @@ export default class App extends React.Component {
     //copia objeto que será apagado
     const copiaObjeto = {
       ...produto,
-      contador: produto.contador - 1
+      quantidade: produto.quantidade - 1
     }
 
     // deleta objeto com esse id
-    const novoArray = this.deletarProdutoUnicoDaLista(produto.id)
+    const novoArray = this.deletarProdutoUnicoDaLista(produto.produto.id)
 
     //da um push do mesmo objeto copiado
     novoArray.push(copiaObjeto)
@@ -198,19 +180,17 @@ export default class App extends React.Component {
 
   render() {
 
-    console.log('Lista produtos app', this.state.listaProdutos)
-    console.log('Preço total', this.state.precoTotal) 
-   
+    
     return (
       <Container className="container">
 
- 
+
         <Filter></Filter>
         <Home
           listaProdutos={this.state.listaProdutos}
           adicionarAoCarrinho={this.adicionarAoCarrinho}
         />
-          
+
         {this.state.carrinhoAparece && <Carrinho
           aparece={this.state.carrinhoAparece}
           precoTotal={this.state.precoTotal}
@@ -220,7 +200,7 @@ export default class App extends React.Component {
           somarPreco={this.somarPreco}
         >
         </Carrinho>}
-        
+
         <DivCarrinho >
           <ImagemCarrinho onClick={() => this.aparecerCarrinho()} src={imgCarrinho} alt="img btn carrinho"></ImagemCarrinho>
         </DivCarrinho>
