@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import imgCarrinho from './imagens/carrinho.png'
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: ${({ aparece }) => (aparece ? '1fr 3fr 1fr' : '1fr 3fr 1fr')};
+ /*  display: grid;
+  grid-template-columns: ${({ aparece }) => (aparece ? '1fr 3fr 1fr' : '1fr 3fr')}; */
   padding: 10px;
   gap: 20px;
   /* border:solid red 1px; */
@@ -20,9 +20,9 @@ const ImagemCarrinho = styled.img`
 `;
 const DivCarrinho = styled.div`
   position:fixed;
-  right: 5vw;
+  right: 1vw;
   bottom: 10vh;
-  border: 1px solid lightgrey;
+  border: 1px solid black;
   border-radius:50%;
 `;
 
@@ -95,7 +95,7 @@ const arrayProdutos = [
 export default class App extends React.Component {
   state = {
     listaProdutos: [...arrayProdutos],
-    carrinhoAparece: true,
+    carrinhoAparece: false,
     carrinhoTeste: [],
     precoTotal: 0,
   }
@@ -211,8 +211,7 @@ export default class App extends React.Component {
           adicionarAoCarrinho={this.adicionarAoCarrinho}
         />
           
-        
-        <Carrinho
+        {this.state.carrinhoAparece && <Carrinho
           aparece={this.state.carrinhoAparece}
           precoTotal={this.state.precoTotal}
           carrinhoTeste={this.state.carrinhoTeste}
@@ -220,7 +219,8 @@ export default class App extends React.Component {
           contarIds={this.contarIds}
           somarPreco={this.somarPreco}
         >
-        </Carrinho>
+        </Carrinho>}
+        
         <DivCarrinho >
           <ImagemCarrinho onClick={() => this.aparecerCarrinho()} src={imgCarrinho} alt="img btn carrinho"></ImagemCarrinho>
         </DivCarrinho>
