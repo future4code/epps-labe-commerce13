@@ -6,7 +6,10 @@ import ProdutoCarrinho from '../produtoCarrinho/ProdutoCarrinho';
 const CarrinhoContainer = styled.div`
     border:solid 1px black;
     min-height: 90vh;
+    display: flex;
+    flex-direction: column;
     display: ${({ aparece }) => (aparece ? '' : 'none')};
+    width: 250px;
 `;
 const Titulo = styled.h2`
     padding-left: 5px;
@@ -29,8 +32,8 @@ export default class Carrinho extends React.Component {
                 <Titulo>Carrinho:</Titulo>
                 {this.props.carrinhoTeste.map(produto => {
                     return <ProdutoCarrinho 
-                        name={produto.name}
-                        preco={produto.value}
+                        nome={produto.nome}
+                        preco={produto.valor}
                         id={produto.id}
                         deletarProduto={this.props.deletarProduto}
                         contador={produto.contador}
