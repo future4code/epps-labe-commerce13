@@ -22,11 +22,11 @@ const Lista = styled.div`
 export default class ProdutoCarrinho extends React.Component {
     render() {
         return (
-                <ProdutoContainer onClick={console.log(this.props.preco)}>
+                <ProdutoContainer>
                     <Lista>
-                        {this.props.contador}x  {this.props.name}
+                        {this.props.contador}x  {this.props.nome}
                     </Lista>
-                    <div ><img onClick={() => this.props.deletarProduto(this.props.id)} src={Excluir}></img></div>
+                    <div ><img onClick={() => this.props.deletarProduto(this.props.id)} src={Excluir} alt="img deletar produtos"></img></div>
                 </ProdutoContainer>)
     }
 }

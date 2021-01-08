@@ -17,7 +17,7 @@ const BoxHome = styled.div`
     margin: 0 auto;
 `
 
-const arrayProdutos = [
+/* const arrayProdutos = [
     {
         id: 1,
         img: 'https://picsum.photos/200/300?random=1',
@@ -73,14 +73,14 @@ const arrayProdutos = [
         nome: 'Produto 8',
         valor: 150.00, 
     }
-]
+] */
 
 export default class Home extends React.Component{
 
     
 
     state = {
-        listaProdutos: arrayProdutos,
+        listaProdutos: this.props.listaProdutos,
         valorSelect: ''
     }
 
@@ -114,7 +114,7 @@ export default class Home extends React.Component{
             })
             /* console.log('Lista da função comparar produtos crescente', listaProdutosCopia) */
         } else{
-            listaProdutosCopia=[...arrayProdutos]
+            listaProdutosCopia=[...this.state.listaProdutos]
         } 
         /* console.log(listaProdutosCopia) */
         /* this.setState({order: true}) */
@@ -126,7 +126,7 @@ export default class Home extends React.Component{
     
 
     render(){
-
+        /* console.log('Props', this.props.listaProdutos) */
         /* const listaProdutosAtualizada = this.compararProdutos()
         console.log('Lista produtos atualizada', listaProdutosAtualizada) */
         return (
@@ -134,7 +134,7 @@ export default class Home extends React.Component{
                 <BoxHome>
 
                     <HeaderProdutos
-                        tamanhoLista={this.state.listaProdutos} 
+                        tamanhoLista={this.props.listaProdutos} 
                         /* listaProdutos={listaProdutosAtualizada} */ 
                         /* compararProdutos={this.compararProdutos} */
                         onChangeSelect={this.onChangeFiltroSelect}
@@ -143,6 +143,7 @@ export default class Home extends React.Component{
                     
                     <Produtos 
                         compararProdutos={this.compararProdutos} 
+                        adicionarAoCarrinho={this.props.adicionarAoCarrinho}
 
                     />
                    
