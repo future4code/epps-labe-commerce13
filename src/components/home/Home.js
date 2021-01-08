@@ -5,6 +5,7 @@ import HeaderProdutos from './HeaderProdutos/HeaderProdutos'
 
 const ContainerHome = styled.div`
     /* background-color: aqua; */
+    width: 100%
     
 ` 
 
@@ -14,7 +15,8 @@ const BoxHome = styled.div`
     flex-direction: column;
     /* justify-content: space-around; */
     align-items: center;
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    width: 100%
 `
 
 /* const arrayProdutos = [

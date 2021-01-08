@@ -9,6 +9,7 @@ const CarrinhoContainer = styled.div`
     display: flex;
     flex-direction: column;
     display: ${({ aparece }) => (aparece ? '' : 'none')};
+    width: 250px;
 `;
 const Titulo = styled.h2`
     padding-left: 5px;
