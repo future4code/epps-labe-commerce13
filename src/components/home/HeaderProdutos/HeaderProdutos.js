@@ -11,14 +11,18 @@ const BoxProdutosHeader = styled.div`
     margin-bottom: 15px;
     border-radius: 10px;
     padding: 10px;
+    border: none;
 `
 
 const SelectProdutos = styled.select`
     height: 25px;
+    border: solid 1px black;
+    border-radius: 3px;
 `
 
 const PaddingItens = styled.div`
     padding: 10px;
+    border: none;
 `
 
 export default class Produtos extends React.Component{

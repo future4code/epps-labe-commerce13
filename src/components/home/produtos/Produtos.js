@@ -10,11 +10,18 @@ const ContainerProdutos = styled.div`
     width: 90%;
     padding: 10px;
     border-radius: 10px;
+    border: none;
 `
 
 const BoxProdutos = styled.div`
     text-align: center;
     border: solid 1px black;
+    display: flex;
+    flex-direction: column;
+`
+
+const ImgProduto = styled.img`
+    width: 100%;
 `
 
 export default class Produtos extends React.Component{
@@ -27,10 +34,10 @@ export default class Produtos extends React.Component{
             <ContainerProdutos>{retornoFuncao.map(produtos => {
                 return (
                     <BoxProdutos>
-                        <img src={produtos.img} alt="img do produto"/>
+                        <ImgProduto src={produtos.img} alt="img do produto"/>
                         <p>{produtos.nome}</p>
                         <p>R$ {parseFloat(produtos.valor).toFixed(2)}</p>
-                        <button>Adicionar ao Carrinho</button>
+                        <button onClick={() => this.props.adicionarAoCarrinho(produtos.id)}>Adicionar ao Carrinho</button>
                     </BoxProdutos>
                 ) 
                 })}
