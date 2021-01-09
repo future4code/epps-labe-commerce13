@@ -130,11 +130,11 @@ export default class App extends React.Component {
   verificarPeloValor = (valorMin= this.state.valueMin, valorMax= this.state.valorMax, valorNomeProduto=this.state.valueNomeProduto) => {
     const listaFiltrada = arrayProdutos.filter((produto) => {
 
-      return produto.valor > valorMin 
+      return produto.valor > valorMin
      
     }).filter((produto) => {
 
-      return produto.valor < valorMax 
+      return produto.valor < valorMax
 
     }).filter((produto) => {
       const nomeProduto = produto.nome.toLowerCase()

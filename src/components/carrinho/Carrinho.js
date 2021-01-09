@@ -4,9 +4,7 @@ import ProdutoCarrinho from '../produtoCarrinho/ProdutoCarrinho';
 
 
 const CarrinhoContainer = styled.div`
-    /* border:solid 1px black; */
-    background-color: #f2f2f2;
-    border-radius: 10px;
+    border:solid 1px black;
     min-height: 90vh;
     display: flex;
     flex-direction: column;
