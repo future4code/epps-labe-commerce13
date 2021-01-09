@@ -27,6 +27,7 @@ const ImgProduto = styled.img`
 export default class Produtos extends React.Component{
 
     render(){
+    
         const retornoFuncao = this.props.compararProdutos()
         
         /* console.log('Comparar produtos', this.props.compararProdutos()) */

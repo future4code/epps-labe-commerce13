@@ -99,12 +99,16 @@ export default class App extends React.Component {
     carrinhoAparece: false,
     carrinhoTeste: [],
     precoTotal: 0,
+    valueMin: 0,
+    valueMax: Infinity,
+    valueNomeProduto: '',
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.carrinhoTeste !== this.state.carrinhoTeste) {
       this.somarPreco()
     }
+
   }
 
   componentDidMount() {
@@ -123,6 +127,72 @@ export default class App extends React.Component {
     this.setState({ precoTotal: somaPreco })
   }
 
+  verificarPeloValor = (valorMin= this.state.valueMin, valorMax= this.state.valorMax, valorNomeProduto=this.state.valueNomeProduto) => {
+    const listaFiltrada = arrayProdutos.filter((produto) => {
+
+      return produto.valor > valorMin
+     
+    }).filter((produto) => {
+
+      return produto.valor < valorMax
+
+    }).filter((produto) => {
+      const nomeProduto = produto.nome.toLowerCase()
+      return nomeProduto.includes(valorNomeProduto.toLowerCase())
+        
+    })
+    
+    this.setState({listaProdutos: listaFiltrada})
+    console.log('Lista valor: ', listaFiltrada)
+    console.log('Lista produtos', this.state.listaProdutos)
+    return listaFiltrada
+    
+  }
+   
+  
+
+  /* verificarPeloMax = (valor) => {
+    const lista = this.state.listaProdutos.filter((produto) => {
+      if (produto.valor < valor) {
+        return true
+      } else {
+        return false
+      }
+    })
+    console.log('Lista valor máximo', lista)
+  } */
+
+
+
+  onChangeValueMin = (e) => {
+    this.setState({
+      valueMin: e.target.value
+    })
+    this.verificarPeloValor(e.target.value, Infinity, this.state.valueNomeProduto)
+  }
+
+  onChangeValueMax = (e) => {
+    if(e.target.value){
+      this.setState({
+        valueMax: e.target.value
+      })
+      this.verificarPeloValor(this.state.valueMin, e.target.value, this.state.valueNomeProduto)
+    } else {
+      this.setState({
+        valueMax: Infinity
+      })
+      this.verificarPeloValor(this.state.valueMin, Infinity, this.state.valueNomeProduto)
+    }
+    
+    
+  }
+
+  onChangeNomeProduto = (e) => {
+    this.setState({
+      valueNomeProduto: e.target.value
+    })
+    this.verificarPeloValor(this.state.valueMin, this.state.valueMax, e.target.value)
+  }
 
   adicionarAoCarrinho = (produto) => {
     const novoCarro = this.state.carrinhoTeste
@@ -144,13 +214,14 @@ export default class App extends React.Component {
 
     this.state.carrinhoTeste.map(produto => {
 
-      if (produto.produto.id === id && produto.quantidade > 1) {
+      /* if (produto.produto.id === id && produto.quantidade > 1) {
         this.deletarProdutoRepetido(produto)
 
-      } else if (produto.produto.id === id && produto.quantidade === 1) {
-        const novoArrayProdutos = this.deletarProdutoUnicoDaLista(produto.produto.id)
-        this.setState({ carrinhoTeste: novoArrayProdutos })
-      }
+      } else if (produto.produto.id === id && produto.quantidade === 1)
+       { */
+      const novoArrayProdutos = this.deletarProdutoUnicoDaLista(/* produto.produto. */id)
+      this.setState({ carrinhoTeste: novoArrayProdutos })
+      /* } */
     })
     this.somarPreco()
   }
@@ -179,16 +250,26 @@ export default class App extends React.Component {
 
 
   render() {
-
+    console.log('valor mínimo: ', this.state.valueMin)
+    console.log('Valor máximo: ', this.state.valueMax)
+    console.log('Nome do produto: ', this.state.valueNomeProduto)
     
+    
+
     return (
       <Container className="container">
 
 
-        <Filter></Filter>
+        <Filter
+          onChangeValueMax={this.onChangeValueMax}
+          onChangeValueMin={this.onChangeValueMin}
+          onChangeNomeProduto={this.onChangeNomeProduto}
+        />
+          
         <Home
           listaProdutos={this.state.listaProdutos}
           adicionarAoCarrinho={this.adicionarAoCarrinho}
+          verificarPeloValor={this.verificarPeloValor}
         />
 
         {this.state.carrinhoAparece && <Carrinho
