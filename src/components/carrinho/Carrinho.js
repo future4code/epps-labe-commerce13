@@ -24,19 +24,19 @@ const Total = styled.p`
     `;
 
 export default class Carrinho extends React.Component {
+    
+
     render() {
+        
         return (
             <CarrinhoContainer
                 aparece={this.props.aparece}
             >
                 <Titulo>Carrinho:</Titulo>
                 {this.props.carrinhoTeste.map(produto => {
-                    return <ProdutoCarrinho 
-                        nome={produto.nome}
-                        preco={produto.valor}
-                        id={produto.id}
+                    return <ProdutoCarrinho
+                        produto={produto}
                         deletarProduto={this.props.deletarProduto}
-                        contador={produto.contador}
                         somarPreco ={this.props.somarPreco}            
                     >
                     </ProdutoCarrinho>

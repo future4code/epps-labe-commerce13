@@ -27,6 +27,7 @@ const ImgProduto = styled.img`
 export default class Produtos extends React.Component{
 
     render(){
+    
         const retornoFuncao = this.props.compararProdutos()
         
         /* console.log('Comparar produtos', this.props.compararProdutos()) */
@@ -37,7 +38,7 @@ export default class Produtos extends React.Component{
                         <ImgProduto src={produtos.img} alt="img do produto"/>
                         <p>{produtos.nome}</p>
                         <p>R$ {parseFloat(produtos.valor).toFixed(2)}</p>
-                        <button onClick={() => this.props.adicionarAoCarrinho(produtos.id)}>Adicionar ao Carrinho</button>
+                        <button onClick={() => this.props.adicionarAoCarrinho(produtos)}>Adicionar ao Carrinho</button>
                     </BoxProdutos>
                 ) 
                 })}

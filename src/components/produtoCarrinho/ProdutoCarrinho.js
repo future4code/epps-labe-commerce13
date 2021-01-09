@@ -24,9 +24,9 @@ export default class ProdutoCarrinho extends React.Component {
         return (
                 <ProdutoContainer>
                     <Lista>
-                        {this.props.contador}x  {this.props.nome}
+                        {this.props.produto.quantidade}x  {this.props.produto.produto.nome}
                     </Lista>
-                    <div ><img onClick={() => this.props.deletarProduto(this.props.id)} src={Excluir} alt="img deletar produtos"></img></div>
+                    <div ><img onClick={() => this.props.deletarProduto(this.props.produto.produto.id)} src={Excluir} alt="img deletar produtos"></img></div>
                 </ProdutoContainer>)
     }
 }

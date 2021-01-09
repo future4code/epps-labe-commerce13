@@ -5,7 +5,7 @@ import HeaderProdutos from './HeaderProdutos/HeaderProdutos'
 
 const ContainerHome = styled.div`
     /* background-color: aqua; */
-    width: 100%
+    width: 100%;
     
 ` 
 
@@ -16,7 +16,7 @@ const BoxHome = styled.div`
     /* justify-content: space-around; */
     align-items: center;
     /* margin: 0 auto; */
-    width: 100%
+    width: 100%;
 `
 
 /* const arrayProdutos = [
@@ -98,7 +98,7 @@ export default class Home extends React.Component{
 
     compararProdutos = () =>{
 
-        let listaProdutosCopia = [...this.state.listaProdutos]
+        let listaProdutosCopia = [...this.props.listaProdutos]
 
         if(this.state.valorSelect === "decrescente"){
             listaProdutosCopia.sort(function(a,b){
@@ -116,7 +116,7 @@ export default class Home extends React.Component{
             })
             /* console.log('Lista da função comparar produtos crescente', listaProdutosCopia) */
         } else{
-            listaProdutosCopia=[...this.state.listaProdutos]
+            listaProdutosCopia=[...this.props.listaProdutos]
         } 
         /* console.log(listaProdutosCopia) */
         /* this.setState({order: true}) */
@@ -146,7 +146,6 @@ export default class Home extends React.Component{
                     <Produtos 
                         compararProdutos={this.compararProdutos} 
                         adicionarAoCarrinho={this.props.adicionarAoCarrinho}
-
                     />
                    
                 </BoxHome>
