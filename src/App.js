@@ -7,10 +7,11 @@ import styled from 'styled-components';
 import imgCarrinho from './imagens/carrinho.png'
 
 const Container = styled.div`
+display: flex;
  /*  display: grid;
   grid-template-columns: ${({ aparece }) => (aparece ? '1fr 3fr 1fr' : '1fr 3fr')}; */
-  padding: 10px;
-  gap: 20px;
+  /* padding: 10px;
+  gap: 20px; */
   /* border:solid red 1px; */
 `;
 const ImagemCarrinho = styled.img`
