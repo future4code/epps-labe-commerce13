@@ -172,9 +172,12 @@ export default class App extends React.Component {
   
   recuperarStorage = () =>{
     const listaProd = localStorage.getItem('listaProdutos')
-    const lista = JSON.parse(listaProd)
-    this.setState({carrinhoTeste: lista})
-    console.log(this.state.carrinhoTeste)
+    if(listaProd){
+      const lista = JSON.parse(listaProd)
+      this.setState({carrinhoTeste: lista})
+      console.log(this.state.carrinhoTeste)
+    }
+ 
   }
   
  
