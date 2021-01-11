@@ -109,15 +109,18 @@ export default class App extends React.Component {
     if (prevState.carrinhoTeste !== this.state.carrinhoTeste) {
       this.somarPreco()
     }
-
+    this.salvarStorage()
   }
 
   componentDidMount() {
     this.somarPreco()
+    this.recuperarStorage()
   };
 
   aparecerCarrinho = () => {
     this.setState({ carrinhoAparece: !this.state.carrinhoAparece })
+    this.recuperarStorage()
+    
   }
 
   somarPreco = () => {
@@ -144,8 +147,8 @@ export default class App extends React.Component {
     })
     
     this.setState({listaProdutos: listaFiltrada})
-    console.log('Lista valor: ', listaFiltrada)
-    console.log('Lista produtos', this.state.listaProdutos)
+    // console.log('Lista valor: ', listaFiltrada)
+    // console.log('Lista produtos', this.state.listaProdutos)
     return listaFiltrada
     
   }
@@ -163,7 +166,18 @@ export default class App extends React.Component {
     console.log('Lista valor máximo', lista)
   } */
 
-
+  salvarStorage(){
+    localStorage.setItem('listaProdutos', JSON.stringify(this.state.carrinhoTeste))
+  }
+  
+  recuperarStorage = () =>{
+    const listaProd = localStorage.getItem('listaProdutos')
+    const lista = JSON.parse(listaProd)
+    this.setState({carrinhoTeste: lista})
+    console.log(this.state.carrinhoTeste)
+  }
+  
+ 
 
   onChangeValueMin = (e) => {
     this.setState({
@@ -208,6 +222,7 @@ export default class App extends React.Component {
       novoCarro.push({ produto: produto, quantidade: 1 })
     }
     this.somarPreco()
+    this.salvarStorage()
   }
 
 
@@ -251,9 +266,9 @@ export default class App extends React.Component {
 
 
   render() {
-    console.log('valor mínimo: ', this.state.valueMin)
-    console.log('Valor máximo: ', this.state.valueMax)
-    console.log('Nome do produto: ', this.state.valueNomeProduto)
+    // console.log('valor mínimo: ', this.state.valueMin)
+    // console.log('Valor máximo: ', this.state.valueMax)
+    // console.log('Nome do produto: ', this.state.valueNomeProduto)
     
     
 
